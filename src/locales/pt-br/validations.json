@@ -1,0 +1,8 @@
+{
+  "general": {
+    "propertyShouldNotExist": "Propriedade {property} não existe nesse domínio",
+    "mandatoryField": "O campo é obrigatório",
+    "stringField": "O campo tem que ser uma string",
+    "errorNotMapped": "Erro não mapeado"
+  }
+}
