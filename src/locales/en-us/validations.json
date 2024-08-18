@@ -1,0 +1,7 @@
+{
+  "general": {
+    "propertyShouldNotExist": "Property {property} should not exist",
+    "mandatoryField": "Field is mandatory",
+    "stringField": "Field should be a string"
+  }
+}
