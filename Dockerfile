@@ -10,7 +10,6 @@ WORKDIR /usr/src/app
 
 # Instalar as dependências
 RUN yarn install
-RUN yarn global add @nestjs/cli
 
 # Copiar os arquivos de configuração do projeto
 COPY package*.json yarn*.lock ./
