@@ -34,4 +34,4 @@ COPY --from=build /usr/src/app/dist ./dist
 EXPOSE 9000
 
 # Definir o comando para iniciar o aplicativo
-CMD ["yarn", "start"]
+CMD ["yarn", "start", "prod"]
