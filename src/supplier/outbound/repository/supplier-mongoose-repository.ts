@@ -45,6 +45,6 @@ export class SupplierMongooseRepository
   }
 
   toObject(supplier: SupplierDocument): Supplier {
-    return supplier.toObject();
+    return supplier.toObject() as unknown as Supplier;
   }
 }
