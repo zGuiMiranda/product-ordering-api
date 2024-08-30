@@ -4,11 +4,15 @@ FROM node:21 AS build
 # Definir o diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copiar os arquivos de configuração do projeto
-COPY package*.json ./
+# # Copiar os arquivos de configuração do projeto
+# COPY package*.json ./
+
 
 # Instalar as dependências
 RUN yarn install
+
+# Copiar os arquivos de configuração do projeto
+COPY package*.json yarn*.lock ./
 
 # Copiar o restante do código do aplicativo
 COPY . .
