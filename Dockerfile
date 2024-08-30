@@ -12,7 +12,7 @@ WORKDIR /usr/src/app
 RUN yarn install
 
 # Copiar os arquivos de configuração do projeto
-COPY package*.json yarn*.lock ./
+COPY package*.json ./
 
 # Copiar o restante do código do aplicativo
 COPY . .
