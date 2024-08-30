@@ -6,6 +6,11 @@ import { AllExceptionsFilter } from '@shared/exception-filter/all-exceptions-fil
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.enableCors({
+    origin: process.env.ORIGIN,
+  });
+
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(
     new I18nValidationPipe(app.get(I18nService), {
@@ -15,6 +20,6 @@ async function bootstrap() {
       forbidUnknownValues: true,
     }),
   );
-  await app.listen(9000);
+  await app.listen(process.env.PORT);
 }
 bootstrap();

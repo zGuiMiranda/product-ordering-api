@@ -19,7 +19,7 @@ export class UpdateSupplierDTO extends AbstractSupplierDTO {
     always: true,
     message: i18nValidationMessage('validations.general.mandatoryField'),
   })
-  _id: string;
+  id: string;
   @IsNotEmpty({
     always: true,
     message: i18nValidationMessage('validations.general.mandatoryField'),

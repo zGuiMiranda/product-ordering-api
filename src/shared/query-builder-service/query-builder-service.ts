@@ -20,7 +20,7 @@ export class QueryBuilderService<Domain, Document>
                     $regex: new RegExp(value.replace(/\*/g, '.*'), 'i'),
                   },
                 }
-              : { [key]: value };
+              : { [`_${key}`]: value };
 
           return filter;
         }),

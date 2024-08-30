@@ -14,5 +14,5 @@ export class FindSupplierDTO extends AbstractSupplierDTO {
     always: true,
     message: i18nValidationMessage('validations.general.stringField'),
   })
-  _id: string;
+  id: string;
 }

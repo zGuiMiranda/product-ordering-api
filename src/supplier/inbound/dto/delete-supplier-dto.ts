@@ -1,18 +1,14 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { i18nValidationMessage } from 'nestjs-i18n';
-import { AbstractSupplierDTO } from './abstract-supplier-dto';
 
-export class DeleteSupplierDTO extends AbstractSupplierDTO {
-  @IsOptional()
+export class DeleteSupplierDTO {
   @IsString({
     always: true,
     message: i18nValidationMessage('validations.general.stringField'),
   })
-  name: string;
-  @IsOptional()
-  @IsString({
+  @IsNotEmpty({
     always: true,
-    message: i18nValidationMessage('validations.general.stringField'),
+    message: i18nValidationMessage('validations.general.mandatoryField'),
   })
-  _id: string;
+  id: string;
 }

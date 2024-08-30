@@ -1,7 +1,16 @@
 version: '3.8'
 
 services:
-  app:
+  mongo:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_DATABASE=product-ordering
+    ports:
+      - '27017:27017'
+    networks:
+      - orion
+
+  product-ordering-api:
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,6 +18,18 @@ services:
       - '9000:9000'
     environment:
       - NODE_ENV=development
+      - MONGODB_URL=mongodb://mongo:27017/product-ordering
+      - ORIGIN=http://localhost:9001
     volumes:
       - .:/usr/src/app
     restart: always
+    env_file:
+      - .env.development
+    depends_on:
+      - mongo
+    networks:
+      - orion
+
+networks:
+  orion:
+    driver: bridge

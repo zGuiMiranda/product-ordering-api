@@ -1,10 +1,10 @@
 export class Supplier {
   constructor(
     private name: string,
-    private _id: string,
+    private id: string,
   ) {
     this.name = name;
-    this._id = _id;
+    this.id = id;
   }
 
   public get getName(): string {
@@ -12,6 +12,6 @@ export class Supplier {
   }
 
   public get getId(): string {
-    return this._id;
+    return this.id;
   }
 }
