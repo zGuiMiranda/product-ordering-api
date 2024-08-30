@@ -11,7 +11,7 @@ import { FilterQuery, Model } from 'mongoose';
 import { RepositoryInterface } from '@shared/interface/outbound/repository-interface';
 
 @Injectable()
-export class SupplierRepository
+export class SupplierMongooseRepository
   extends AbstractRepository<
     Supplier | FilterQuery<SupplierDocument>,
     SupplierDocument
@@ -32,7 +32,7 @@ export class SupplierRepository
   }
   async update(domain: Supplier): Promise<Supplier> {
     return this.toObject(
-      await super.updateOne({ id: domain.getId, ...domain }),
+      await super.updateOne({ ...domain, id: domain.getId }),
     );
   }
   async save(supplier: Supplier): Promise<Supplier> {

@@ -6,19 +6,20 @@ import {
   HttpStatus,
   Post,
   Put,
+  Query,
   Res,
 } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
-import { Supplier } from '../core/domain/supplier';
-import { CreateSupplierDTO } from './dto/create-supplier-dto';
-import { CreateSupplierUseCase } from '../core/use-case/create-supplier-use-case';
 import { Response } from 'express';
+import { Supplier } from '../core/domain/supplier';
+import { CreateSupplierUseCase } from '../core/use-case/create-supplier-use-case';
+import { DeleteSupplierUseCase } from '../core/use-case/delete-supplier-use-case';
 import { GetAllSuppliersUseCase } from '../core/use-case/get-all-suppliers-use-case';
+import { UpdateSupplierUseCase } from '../core/use-case/update-supplier-use-case';
+import { CreateSupplierDTO } from './dto/create-supplier-dto';
+import { DeleteSupplierDTO } from './dto/delete-supplier-dto';
 import { FindSupplierDTO } from './dto/find-supplier-dto';
 import { UpdateSupplierDTO } from './dto/update-supplier-dto';
-import { UpdateSupplierUseCase } from '../core/use-case/update-supplier-use-case';
-import { DeleteSupplierDTO } from './dto/delete-supplier-dto';
-import { DeleteSupplierUseCase } from '../core/use-case/delete-supplier-use-case';
 
 @Controller('supplier')
 export class SupplierController {
@@ -61,7 +62,7 @@ export class SupplierController {
 
   @Delete('delete-supplier')
   async deleteSupplier(
-    @Body() deleteSupplierDTO: DeleteSupplierDTO,
+    @Query() deleteSupplierDTO: DeleteSupplierDTO,
     @Res() res: Response,
   ) {
     const supplier = plainToClass(Supplier, deleteSupplierDTO);

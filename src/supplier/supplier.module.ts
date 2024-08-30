@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import SupplierSchema, { Supplier } from './outbound/schemas/supplier-schema';
 import { SupplierController } from './inbound/supplier.controller';
 import { CreateSupplierUseCase } from './core/use-case/create-supplier-use-case';
-import { SupplierRepository } from './outbound/repository/supplier-repository';
+import { SupplierMongooseRepository } from './outbound/repository/supplier-mongoose-repository';
 import { RepositoryInterface } from '@shared/interface/outbound/repository-interface';
 import { Supplier as SupplierDomain } from './core/domain/supplier';
 import { GetAllSuppliersUseCase } from './core/use-case/get-all-suppliers-use-case';
@@ -24,14 +24,14 @@ import { DeleteSupplierUseCase } from './core/use-case/delete-supplier-use-case'
     CreateSupplierUseCase,
     GetAllSuppliersUseCase,
     UpdateSupplierUseCase,
-    SupplierRepository,
+    SupplierMongooseRepository,
     {
       provide: CreateSupplierUseCase,
       useFactory: (repo: RepositoryInterface<SupplierDomain>) => {
         return new CreateSupplierUseCase(repo);
       },
 
-      inject: [SupplierRepository],
+      inject: [SupplierMongooseRepository],
     },
     {
       provide: GetAllSuppliersUseCase,
@@ -39,7 +39,7 @@ import { DeleteSupplierUseCase } from './core/use-case/delete-supplier-use-case'
         return new GetAllSuppliersUseCase(repo);
       },
 
-      inject: [SupplierRepository],
+      inject: [SupplierMongooseRepository],
     },
     {
       provide: UpdateSupplierUseCase,
@@ -47,7 +47,7 @@ import { DeleteSupplierUseCase } from './core/use-case/delete-supplier-use-case'
         return new UpdateSupplierUseCase(repo);
       },
 
-      inject: [SupplierRepository],
+      inject: [SupplierMongooseRepository],
     },
     {
       provide: DeleteSupplierUseCase,
@@ -55,7 +55,7 @@ import { DeleteSupplierUseCase } from './core/use-case/delete-supplier-use-case'
         return new DeleteSupplierUseCase(repo);
       },
 
-      inject: [SupplierRepository],
+      inject: [SupplierMongooseRepository],
     },
   ],
 })
