@@ -1,37 +1,29 @@
-# Usar a imagem base do Node.js
-FROM node:21 AS build
+FROM node:20-alpine as builder
 
-# Definir o diretório de trabalho
-WORKDIR /usr/src/app
+ENV NODE_ENV build
 
-# # Copiar os arquivos de configuração do projeto
-# COPY package*.json ./
+USER node
+WORKDIR /home/node
 
-
-# Instalar as dependências
-RUN yarn install
-
-# Copiar os arquivos de configuração do projeto
 COPY package*.json ./
+RUN npm ci
 
-# Copiar o restante do código do aplicativo
-COPY . .
+COPY --chown=node:node . .
+RUN npx prisma generate \
+    && npm run build \
+    && npm prune --omit=dev
 
-# Compilar o projeto
-RUN yarn build
+# ---
 
-# Usar a imagem base do Node.js para a etapa de produção
-FROM node:21
+FROM node:20-alpine
 
-# Definir o diretório de trabalho
-WORKDIR /usr/src/app
+ENV NODE_ENV production
 
-# Copiar as dependências e o código compilado da etapa de build
-COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/dist ./dist
+USER node
+WORKDIR /home/node
 
-# Expôr a porta em que o aplicativo vai rodar
-EXPOSE 9000
+COPY --from=builder --chown=node:node /home/node/package*.json ./
+COPY --from=builder --chown=node:node /home/node/node_modules/ ./node_modules/
+COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
 
-# Definir o comando para iniciar o aplicativo
-CMD ["yarn", "start", "prod"]
+CMD ["node", "dist/server.js"]
