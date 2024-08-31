@@ -7,9 +7,18 @@ import { AllExceptionsFilter } from '@shared/exception-filter/all-exceptions-fil
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const allowedOrigins = process.env.ORIGINS ? process.env.ORIGINS.split(',') : [];
+
   app.enableCors({
-    origin: process.env.ORIGIN,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
   });
+
 
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(
