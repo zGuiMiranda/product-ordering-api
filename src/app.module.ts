@@ -14,8 +14,12 @@ const ENV = `.env.${process.env.MONGO_DATABASE || 'development'}`;
       isGlobal: true,
     }),
     MongooseModule.forRoot(
-      process.env.MONGODB_URL,
-      // `mongodb://${process.env.MONGO_ADDRESS}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`,
+      //docker local abaixo
+    //  process.env.MONGODB_URL,
+    //atlas abaixo
+    `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_APP_NAME_ATLAS}.yn1vf.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.MONGO_APP_NAME_ATLAS}`
+     //mongo local abaixo
+    // `mongodb://${process.env.MONGO_ADDRESS}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`,
     ),
     I18nConfig,
     SupplierModule,
