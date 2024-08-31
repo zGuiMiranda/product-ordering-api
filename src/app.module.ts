@@ -14,8 +14,8 @@ const ENV = `.env.${process.env.MONGO_DATABASE || 'development'}`;
       isGlobal: true,
     }),
     MongooseModule.forRoot(
-      //process.env.MONGODB_URL,
-       `mongodb://${process.env.MONGO_ADDRESS}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`,
+      process.env.MONGODB_URL,
+      // `mongodb://${process.env.MONGO_ADDRESS}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`,
     ),
     I18nConfig,
     SupplierModule,
