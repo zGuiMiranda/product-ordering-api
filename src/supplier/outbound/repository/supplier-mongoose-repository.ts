@@ -45,6 +45,12 @@ export class SupplierMongooseRepository
   }
 
   toObject(supplier: SupplierDocument): Supplier {
-    return supplier.toObject() as unknown as Supplier;
+    return supplier.toObject({
+      transform: (_doc, ret) => {
+        ret.id = ret._id;
+        delete ret._id;
+        return ret;
+      },
+    }) as unknown as Supplier;
   }
 }
