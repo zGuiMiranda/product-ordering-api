@@ -42,7 +42,7 @@ export class SupplierController {
 
   @Get('get-suppliers')
   async getAllSuppliers(
-    @Body() findSupplierDTO: FindSupplierDTO,
+    @Query() findSupplierDTO: FindSupplierDTO,
     @Res() res: Response,
   ) {
     const supplier = plainToClass(Supplier, findSupplierDTO);
