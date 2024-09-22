@@ -1,13 +1,7 @@
-import {
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  IsUUID,
-  isUUID,
-} from 'class-validator';
-import { AbstractSupplierDTO } from './abstract-supplier-dto';
 import { Expose } from 'class-transformer';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { i18nValidationMessage } from 'nestjs-i18n';
+import { AbstractSupplierDTO } from './abstract-supplier-dto';
 
 export class UpdateSupplierDTO extends AbstractSupplierDTO {
   @Expose()

@@ -1,9 +1,4 @@
-import {
-  CookieResolver,
-  HeaderResolver,
-  I18nModule,
-  QueryResolver,
-} from 'nestjs-i18n';
+import { I18nModule } from 'nestjs-i18n';
 import { ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { CustomQueryResolver } from 'custom-resolver-i18n';
@@ -16,7 +11,10 @@ export const I18nConfig = I18nModule.forRootAsync({
       'pt-*': 'pt-br',
     },
     loaderOptions: {
-      path: join(__dirname, '../locales/'),
+      path: join(
+        __dirname,
+        process.env.NODE_ENV === 'development' ? '../locales/' : './locales',
+      ),
       watch: true,
     },
   }),

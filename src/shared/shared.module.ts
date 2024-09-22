@@ -1,5 +1,5 @@
 import { Module, Global } from '@nestjs/common';
-import { QueryBuilderService } from '@shared/query-builder-service/query-builder-service';
+import { QueryBuilderService } from './query-builder-service/query-builder-service';
 
 @Global()
 @Module({

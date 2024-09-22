@@ -3,7 +3,6 @@ import { HydratedDocument } from 'mongoose';
 import { AbstractSchema } from 'src/shared/abstract/inbound/AbstractSchema';
 
 export type SupplierDocument = HydratedDocument<Supplier>;
-//export type SupplierDocument = Document & Supplier;
 
 @Schema({ versionKey: false })
 export class Supplier {
