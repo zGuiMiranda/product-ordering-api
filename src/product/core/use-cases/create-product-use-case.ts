@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { RepositoryInterface } from '@shared/interface/outbound/repository-interface';
 import { useCaseInterface } from '@shared/interface/core/use-case-interface';
 import { Product } from '../entities/product.entity';
-import { ValidationError } from 'class-validator';
+import { RedisCacheRepositoryInterface } from '@shared/interface/outbound/redis-cache-repository-interface';
 
 export type InputCreateProduct = {
   name: string;
-  unitPrice: number;
+  price: number;
   description: string;
   quantity: number;
   supplierId: string;
@@ -14,12 +14,38 @@ export type InputCreateProduct = {
 
 @Injectable()
 export class CreateProductUseCase
-  implements useCaseInterface<Product, Product>
+  implements useCaseInterface<InputCreateProduct, Output>
 {
-  constructor(readonly productRepository: RepositoryInterface<Product>) {}
+  constructor(
+    readonly productRepository: RepositoryInterface<Product, Product>,
+  ) {}
 
-  async execute(data: InputCreateProduct): Promise<Product> {
-    if (!data.name) throw new Error('as');
-    return this.productRepository.save(data);
+  async execute(data: InputCreateProduct): Promise<Output> {
+    const product = Product.create(
+      data.name,
+      data.description,
+      data.price,
+      data.quantity,
+      data.supplierId,
+    );
+
+    const productResponse = await this.productRepository.save(product);
+    return {
+      id: productResponse.Id,
+      name: productResponse.Name,
+      description: productResponse.Description,
+      price: productResponse.Price,
+      quantity: productResponse.Quantity,
+      supplierId: productResponse.SupplierId,
+    };
   }
 }
+
+type Output = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  supplierId: string;
+};

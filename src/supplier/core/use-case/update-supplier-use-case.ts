@@ -7,7 +7,9 @@ import { useCaseInterface } from '@shared/interface/core/use-case-interface';
 export class UpdateSupplierUseCase
   implements useCaseInterface<Supplier, Supplier>
 {
-  constructor(readonly supplierRepository: RepositoryInterface<Supplier>) {}
+  constructor(
+    readonly supplierRepository: RepositoryInterface<Supplier, Supplier>,
+  ) {}
   async execute(data: Supplier): Promise<Supplier> {
     console.log('vv');
     return this.supplierRepository.update(data);

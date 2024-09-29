@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { AbstractSchema } from '@shared/abstract/inbound/AbstractSchema';
 import { HydratedDocument } from 'mongoose';
-import { AbstractSchema } from '../../../shared/abstract/inbound/AbstractSchema';
 
 export type ProductDocument = HydratedDocument<Product>;
 
@@ -13,7 +13,7 @@ export class Product {
   @Prop({ required: true })
   supplierId: string;
   @Prop({ required: true })
-  unitPrice: number;
+  price: number;
   @Prop({ required: true })
   quantity: number;
 }

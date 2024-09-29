@@ -1,4 +1,4 @@
-export interface RedisCacheRepositoryInterface<T> {
-  save(data: T): Promise<T>;
-  get(key: T): Promise<T>;
+export interface RedisCacheRepositoryInterface<T, R> {
+  save(key: R, data: T): Promise<R>;
+  get(key: R): Promise<R>;
 }

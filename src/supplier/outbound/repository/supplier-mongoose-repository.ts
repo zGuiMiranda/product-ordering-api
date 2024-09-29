@@ -1,4 +1,3 @@
-import { QueryBuilderService } from '../../../shared/query-builder-service/query-builder-service';
 import { Injectable } from '@nestjs/common/decorators/core';
 import { Supplier } from '../../core/domain/supplier';
 import { AbstractRepository } from '@shared/abstract/outbound/AbstractRepository';
@@ -9,6 +8,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
 import { RepositoryInterface } from '@shared/interface/outbound/repository-interface';
+import { QueryBuilderService } from '@shared/query-builder-service/query-builder-service';
 
 @Injectable()
 export class SupplierMongooseRepository

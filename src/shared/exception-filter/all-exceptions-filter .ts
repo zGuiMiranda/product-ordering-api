@@ -1,13 +1,13 @@
 import {
-  ExceptionFilter,
-  Catch,
   ArgumentsHost,
+  BadRequestException,
+  Catch,
+  ExceptionFilter,
   HttpException,
   HttpStatus,
-  BadRequestException,
 } from '@nestjs/common';
+import { ValidationError } from '@shared/infra/ValidationError';
 import { CastError } from 'mongoose';
-import { I18nService } from 'nestjs-i18n';
 
 const errorMessagesHelper = {
   CastError: (exception: CastError) => exception.message,
@@ -15,6 +15,7 @@ const errorMessagesHelper = {
   TypeError: (exception: TypeError) => exception.message,
   BadRequestException: (exception: BadRequestException) =>
     exception.getResponse(),
+  ValidationError: (exception: ValidationError) => exception.message,
   default: (exception: string) => exception,
 };
 

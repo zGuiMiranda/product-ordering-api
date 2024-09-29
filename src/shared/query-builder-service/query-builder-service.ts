@@ -7,6 +7,7 @@ export class QueryBuilderService<Domain, Document>
   implements InterfaceQueryBuilderService<Domain, FilterQuery<Document>>
 {
   buildQueryMongoose(data: Domain) {
+    if (!data) return;
     if (!Object.values(data).some((property) => property)) return;
 
     const filters: FilterQuery<Document> = {

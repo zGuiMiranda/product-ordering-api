@@ -25,7 +25,7 @@ export class CreateProductDto {
   @IsNotEmpty()
   @Min(1)
   @IsNumber()
-  unitPrice: number;
+  price: number;
 
   @IsNotEmpty()
   @IsNumber()
